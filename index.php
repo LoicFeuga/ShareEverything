@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
+	
+	<?php
+		include "php/classes/DataBase.php";
+		//Connexion localhost
+		$pdo = new DataBase("laudtayq","root","localhost","");
 
+	?>
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
