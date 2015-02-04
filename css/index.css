@@ -28,18 +28,6 @@ header {
 	color: #000;
 	background: #FFF;
 }
-.img-v{
-	width:30%;
-}
-.v-center{
-	margin-left:auto;
-	margin-right:auto;
-}
-
-.v-title{
-	text-align: center;
-	font-size: 30px;
-}
 
 .navbar {
 	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -51,71 +39,19 @@ header {
 	border-color: transparent;
 }
 
-.v-top-buffer{
+#displayCreate, #displayJoin{
+	display:none;
+}
+
+.margin-top{
 	margin-top: 20px;
 }
 
-.v-top-buffer-2{
-	margin-top: 160px;
-}
-.centerv{
-	text-align: center;
-	font-size: 80px;
-	height: 150px;
-	color: white;
-	line-height: 150px;
-}
-.centerv2{
-	text-align: center;
-	font-size: 80px;
-	margin-left:auto;
-	margin-right:auto;
-	height: 150px;
-	width:400px;
-	color: white;
-	line-height: 150px;
-}
-
-.addGroupe{
-	position:absolute;
-	top:80%;
-	left:85%;
-	width: 80px;
-	opacity:0;
-	text-align: center;
-	line-height: 80px;
-	font-size: 50px;
-	color:white;
-	height: 80px;
-	background: blue;
-	border-radius: 50%;
-}
-
-.container_addGroupe{
-
-	display: none;
-	position:absolute;
-	left:0; top:30%;
-	width: 100%;
-	z-index: 999;
-	height:100%;
-	line-height: 100%;
-	text-align: center;
-}
-
-.formAddGroupe{
-	margin-left:auto;
-	margin-right:auto;
-	color:white;
-	width: 300px;
-	height: 200px;
-	line-height: 40px;
-	background: rgba(163, 163, 215, 0.7);
-	padding: 20px 20px;
-	border-radius: 10px;
+.tchat{
+	height: 50vh;
 
 }
 
-#vnav{
-	height: 150px;
+.input-group{
+	margin-bottom: 20px;
 }

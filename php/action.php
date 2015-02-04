@@ -22,6 +22,25 @@ $pdo = new DataBase("laudtayq","root","localhost","");
 
 switch($_['action']){
 
+     case 'create_room':
+          include 'classes/User.php';
+          include 'classes/Room.php';
+
+          $room = new Room($_['room'],$_['description'],$pdo);
+
+          $room->insertRoom();
+          //INSERT INTO de la room
+          $room->setId($pdo->getDb()->lastInsertId());
+          $token=md5(uniqid(rand(), true));
+          $_COOKIE['token'] = $token; 
+          $user = new User($token,$room->getId(),$pdo); 
+          $user->insertUser();
+
+          session_start();
+          $_SESSION['pseudo'] = $_['pseudo'];
+          $_SESSION['room'] = $_['room'];
+          $result[0] = $_SESSION['pseudo'] ;
+     break;
 
      case 'add_groupe':
      	include 'classes/Groupe.php';

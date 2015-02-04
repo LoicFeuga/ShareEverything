@@ -1,53 +1,50 @@
-<!DOCTYPE html>
-<html lang="fr">
-	
-	<?php
-		include "php/classes/DataBase.php";
-		//Connexion localhost
-		$pdo = new DataBase("laudtayq","root","localhost","");
+<?php include 'php/header.php'; ?>
 
-	?>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	
-		<!-- Inclusion de bootstrap -->
-		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css">
-
-
-		<!-- Inclusion des feuilles de styles -->
-		<link rel="stylesheet" type="text/css" href="css/index.css">
-		
-
-
-	</head>
-
-	<body>
-		
-	<div class="container">
-			<div class="row">
-				<div class="col-lg-3"><button class="btn btn-info">Valider</button></div>
-				<div class="col-lg-3"><button class="btn btn-info">Valider</button></div>
-				<div class="col-lg-3"><button class="btn btn-info">Valider</button></div>
-				<div class="col-lg-3"><button class="btn btn-info">Valider</button></div>				
+<div class="container">
+	<div class="row">	
+		<div id="displayCreate" class="col-lg-12">
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1"></span>
+				<input type="text" id="twPseudo" class="form-control" placeholder="Your pseudo " aria-describedby="basic-addon1">
 			</div>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1"></span>
+				<input type="text" id="twRoomName" class="form-control" placeholder="Room name" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon2"></span>
+				<input type="text" id="twRoomDescription" class="form-control" placeholder="Room description" aria-describedby="basic-addon2">
+			</div>
+			<div id="btnCreate"class="btn btn-info" >Create</div>
 		</div>
 
+		<div id="displayJoin" class="col-lg-12">
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1"></span>
+				<input type="text" class="form-control" placeholder="Your pseudo " aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1"></span>
+				<input type="text" class="form-control" placeholder="Room name" aria-describedby="basic-addon1">
+			</div> 	
+			<div id="btnJoin" class="btn btn-info" >Join</div>
+		</div>
+	</div>
+</div>
 
 
 
-		<!-- Inclusion des pages jquery -->
-		<script src="https://code.jquery.com/jquery.min.js"></script>
+
+<!-- Inclusion des pages jquery -->
+<script src="https://code.jquery.com/jquery.min.js"></script>
 
 		<!-- En local
 		<script src="js/jquery/jquery.js"></script>
-		-->
+	-->
 
-		<!-- Inclusion des pages JavaScript -->
-		<script src="js/index.js"></script>
+	<!-- Inclusion des pages JavaScript -->
+	<script src="js/index.js"></script>
 
-	</body>
+</body>
 
 </html>
-				

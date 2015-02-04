@@ -189,6 +189,7 @@ class DataBase{
 	*/
 	public function getDb()
 	{
+		$this->getPDO();
 		return $this->db;
 	}
 }
