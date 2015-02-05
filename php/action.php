@@ -19,6 +19,7 @@ include 'classes/DataBase.php';
 
 $pdo = new DataBase("laudtayq","root","localhost","");
 
+  session_start();
 
 switch($_['action']){
 
@@ -36,71 +37,32 @@ switch($_['action']){
           $user = new User($token,$room->getId(),$pdo); 
           $user->insertUser();
 
-          session_start();
           $_SESSION['pseudo'] = $_['pseudo'];
           $_SESSION['room'] = $_['room'];
           $result[0] = $_SESSION['pseudo'] ;
      break;
 
-     case 'add_groupe':
-     	include 'classes/Groupe.php';
-     	include 'classes/User.php';
-     	include 'classes/ListGroupe.php';
+     case 'join_room':
+          include 'classes/User.php';
+          include 'classes/Room.php';
 
-     	$user = new User($_COOKIE['startSpeedWay'],0,$pdo);
 
-     	//Si l'utilisateur n'as pas encore fait de groupe
-     	if($user->haveAlreadyListGroupe() == 0){
-     		//On créé une liste de groupe 
-     		$list_groupe = new ListGroupe($user->getId(),0,$pdo);
-     		$list_groupe->createList(); 
+          $room = new Room($_['room'],$_['room'],$pdo);
 
-               //Récupération de l'id l_groupe généré 
-               $id_l_groupe = $pdo->getDb()->lastInsertId();
+          if($room->exist() == 1){
+               $room->getRoom();
+               $token=md5(uniqid(rand(), true));
+               $_COOKIE['token'] = $token; 
+               $user = new User($token, $room->getId(),$pdo);
+               $user->updateRoom($room->getId());
+               $_SESSION['pseudo'] = $_['pseudo'];
+               $_SESSION['room'] = $_['room'];
+               $result[1] = $_SESSION['room'];
+          }
 
-               //Mise à jour dans la table user du new id_l_groupe
-               $user->updateIdLGroupe($id_l_groupe);
-
-     		//On créé un groupe
-	          $group = new Groupe($_['name'],0,$id_l_groupe,$pdo);
-	     	$group->addGroupe();
-	     	
-               //Récupération de l'id groupe généré
-               $i_g = $pdo->getDb()->lastInsertId();
-	     	//On ajout ce groupe à cette list
-	     	$list_groupe->addGroupe($i_g);
-
-               $result[3]="haveAlreadyListGroupe";
-	     	
-     	}else{
-               //##here
-               
-               $id = $user->getId();
-               $user->setLGroupe($user->getLGroupe());
-
-               $list_groupe = new ListGroupe($id,0,$pdo);
-
-               //On créé un groupe
-               $group = new Groupe($_['name'],0,$id_l_groupe,$pdo);
-               $group->addGroupe();
-
-               $result[2] = $id;
-
-     	}
-     	$result[0] = 1;
+          $result[0] = $room->exist();
      break;
 
-     case 'add_user':
-     	include 'classes/User.php';
-     	if(!isset($_COOKIE['startSpeedWay'])) {
-	     	$speedWayAccount=md5(uniqid(rand(), true)); 
-	     	$user = new User($speedWayAccount,0,$pdo);
-	     	$user->addUser();
-		}else{
-			$speedWayAccount = $_COOKIE['startSpeedWay'];
-		}
-        $result[0] = $speedWayAccount;
-     break;
 
      default:
          $result ="Aucune action définie";

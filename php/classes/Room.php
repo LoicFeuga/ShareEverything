@@ -25,6 +25,22 @@ class Room{
 		$this->id=$id;
 	}
 
+	public function exist(){
+		$req = $this->pdo->queryOne("SELECT * FROM se_room WHERE name = '".$this->name."' ");
+		if($req->id != 0 && $req !=NULL){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
+	public function getRoom(){
+		$req = $this->pdo->queryOne("SELECT * FROM se_room WHERE name = '".$this->name."' ");
+		$this->id = $req->id;
+		$this->description = $req->description;
+
+	}
+
 }
 
 ?>

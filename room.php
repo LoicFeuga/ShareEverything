@@ -5,7 +5,7 @@
 include "php/classes/DataBase.php";
 		//Connexion localhost
 $pdo = new DataBase("laudtayq","root","localhost","");
-
+session_start();
 ?>
 <head>
 	<meta charset="UTF-8">
@@ -42,7 +42,7 @@ $pdo = new DataBase("laudtayq","root","localhost","");
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-left">
-					<li id="room"><a>Room : <?php session_start(); echo $_SESSION['room'];?></a></li> 
+					<li id="room"><a>Room : <?php  echo $_SESSION['room'];?></a></li> 
 					<li id="pseudo"><a>Pseudo : <?php ; echo $_SESSION['pseudo'];?></a></li> 
 				</ul>
 

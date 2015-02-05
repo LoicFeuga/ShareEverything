@@ -38,4 +38,23 @@ $(document).ready(function(){
 		});    
 		
 	});
+
+	$("#btnJoin").click(function(){
+
+		var pseudo = $("#twJPseudo").val();
+		var room = $("#twJRoomName").val();
+		$.ajax({
+			type: "POST",
+			url: "./php/action.php?action=join_room",
+			data: {
+				pseudo: pseudo,
+				room: room
+			},
+			success: function(r) {
+				var result = eval(r);
+				document.location="room.php";
+			}
+		});    
+		
+	});
 });
