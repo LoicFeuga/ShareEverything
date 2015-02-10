@@ -42,8 +42,8 @@ session_start();
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-left">
-					<li id="room"><a>Room : <?php  echo $_SESSION['room'];?></a></li> 
-					<li id="pseudo"><a>Pseudo : <?php ; echo $_SESSION['pseudo'];?></a></li> 
+					<li id="room"><a>Room : <label><?php  echo $_SESSION['room'];?></label></a></li> 
+					<li id="pseudo"><a>Pseudo : <label><?php ; echo $_SESSION['pseudo'];?></label></a></li> 
 				</ul>
 
 			</div><!-- /.navbar-collapse -->
@@ -55,14 +55,14 @@ session_start();
 
 <div class="container">
 		<div class="row">	
-			<textarea id="displayTchat" class="col-lg-12 tchat">
+			<div id="displayTchat" class="col-lg-12 tchat">
 
-			</textarea>
+			</div>
 
 		</div>
 		<div class="row">
-			<input type="text" class="col-lg-12 margin-top"></input>
-			<button class="col-lg-4 col-lg-offset-8 btn btn-info margin-top">Send</button>
+			<input type="text" class="col-lg-12 margin-top" id="message"></input>
+			<button class="col-lg-4 col-lg-offset-8 btn btn-info margin-top" id="send">Send</button>
 		</div>
 	</div>
 

@@ -43,15 +43,42 @@ header {
 	display:none;
 }
 
+#displayTchat{
+}
+
 .margin-top{
 	margin-top: 20px;
 }
 
 .tchat{
 	height: 50vh;
+	overflow:auto;
+	color :black;
+	height: 500px;
+	
+	background: #A9EAFE;
+
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 15px;
+
+	-webkit-border: 2px solid lightblue;
+	-moz-border: 2px solid lightblue;
+	border: 5px solid lightblue;
 
 }
 
 .input-group{
 	margin-bottom: 20px;
+}
+
+#message {
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 15px;
+	height: 50px;
+	-webkit-border: 2px solid lightblue;
+	-moz-border: 2px solid lightblue;
+	border: 5px solid lightblue;
+
 }

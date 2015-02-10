@@ -26,14 +26,22 @@ switch($_['action']){
      case 'create_room':
           include 'classes/User.php';
           include 'classes/Room.php';
+          include 'classes/Tchat.php';
 
           $room = new Room($_['room'],$_['description'],$pdo);
 
           $room->insertRoom();
-          //INSERT INTO de la room
-          $room->setId($pdo->getDb()->lastInsertId());
-          $token=md5(uniqid(rand(), true));
+
+          //SELECT * AND set 
+          $room->setRoomFromBDD();
+          $room->createTchat();
+          
+          $tchat = new Tchat($room->getIdTchat(), $pdo);
+          $tchat->createTchat();
+        
+         $token=md5(uniqid(rand(), true));
           $_COOKIE['token'] = $token; 
+
           $user = new User($token,$room->getId(),$pdo); 
           $user->insertUser();
 
@@ -45,22 +53,82 @@ switch($_['action']){
      case 'join_room':
           include 'classes/User.php';
           include 'classes/Room.php';
+          include 'classes/Tchat.php';
 
 
           $room = new Room($_['room'],$_['room'],$pdo);
 
           if($room->exist() == 1){
-               $room->getRoom();
+               $room->setRoomFromBDD();
                $token=md5(uniqid(rand(), true));
                $_COOKIE['token'] = $token; 
-               $user = new User($token, $room->getId(),$pdo);
-               $user->updateRoom($room->getId());
+
                $_SESSION['pseudo'] = $_['pseudo'];
-               $_SESSION['room'] = $_['room'];
+               $_SESSION['$room'] = $_['room'];
+               $pseudo = $_SESSION['pseudo'];
+
+               $user = new User($token,$pseudo, $room->getId(),$pdo);
+               $user->updateRoom($room->getId());
+
+               $tchat = new Tchat($room->getIdTchat(), $pdo);
+
+
                $result[1] = $_SESSION['room'];
+               $result[2] = $tchat->getId();
           }
 
           $result[0] = $room->exist();
+     break;
+
+
+     case 'send_message':
+          include 'classes/User.php';
+          include 'classes/Room.php';
+          include 'classes/Tchat.php';
+
+
+          $room = new Room($_['room'],$_['room'],$pdo);
+
+          if($room->exist() == 1){
+               $room->setRoomFromBDD();
+               $pseudo = $_SESSION['pseudo'];
+
+
+               $user = new User(0,$pseudo, $room->getId(),$pdo);
+
+               $user->setUserFromBDDPseudo();
+
+               $tchat = new Tchat($room->getIdTchat(), $pdo);
+
+               $tchat->sendMessage($_['message'],$_['pseudo']);
+               $result[0] = 1;
+          }
+
+     break;
+
+     case 'get_message':
+          include 'classes/User.php';
+          include 'classes/Room.php';
+          include 'classes/Tchat.php';
+
+           $room = new Room($_['room'],$_['room'],$pdo);
+
+            if($room->exist() == 1){
+               $room->setRoomFromBDD();
+               $pseudo = $_SESSION['pseudo'];
+
+               $tchat = new Tchat($room->getIdTchat(), $pdo  );
+
+               $data = $tchat->getAllMessage();
+
+               $result[0] = "";          
+               for($i = count($data) - 1 ; $i>=0;$i--){
+                    if($data[$i]->date > time() - 1000){
+                    $result[0].="<p>[".gmdate("H:i:s", $data[$i]->date)."]  ".$data[$i]->pseudo ." : ".$data[$i]->text." </p></br>";
+               }
+          }
+
+          }
      break;
 
 
